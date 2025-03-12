@@ -33,7 +33,50 @@ There should be one CustomResource for each config file in `/etc/config` (can al
 
 There should also be one for `/etc/board.json`.
 
+These objects should be constructed of embedded structs mirroring the ubus uci config `.type` field that they are, e.g:.
+
+```
+$ ubus call uci get '{"config":"network"}'                                                                                                                      
+{
+    "values": {
+        "loopback": {
+            ".anonymous": false,
+            ".type": "interface", # one subtype
+            ".name": "loopback",
+            ".index": 0,
+            "device": "lo",
+            "proto": "static",
+            "ipaddr": "127.0.0.1",
+            "netmask": "255.0.0.0"
+        },
+        "globals": {
+            ".anonymous": false,
+            ".type": "globals", # another subtype
+            ".name": "globals",
+            ".index": 1,
+            "ula_prefix": "fdcc:72bd:c25c::/48"
+        },
+        ...
+    }
+}
+```
+
+In Go:
+```
+type UCIConfigType string
+
+type UCIConfigSpec struct {
+	ConfigType UCIConfigType `json:".type,omitempty"`
+
+	// +optional
+	SelfSignedTLSBundles []G8sTargets `json:"selfSignedTLSBundles,omitempty"`
+
+	// +optional
+	SSHKeyPairs []G8sTargets `json:"sshKeyPairs,omitempty"`
+}
+```
+
 #### Controller Logic
-At first boot, a uci session must be established which will be used for all queries and updates. The configs should be read from the board as they are
-and used to create the CustomResource instances. From there, controller-runtime will be used to execute logic based on what changes
-are detected.
+The controller will require an IP address and a username/password to be passed to it as configuration values in order to connect
+to the router. At first boot, a uci session must be established which will be used for all queries and updates. The configs should
+be read from the board and used to create the CustomResource instances. From there, controller-runtime will manage state.
