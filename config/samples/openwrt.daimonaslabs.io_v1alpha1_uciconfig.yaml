@@ -1,0 +1,9 @@
+apiVersion: openwrt.daimonaslabs.io.daimonaslabs.io/v1alpha1
+kind: UCIConfig
+metadata:
+  labels:
+    app.kubernetes.io/name: openwrt-controller
+    app.kubernetes.io/managed-by: kustomize
+  name: uciconfig-sample
+spec:
+  # TODO(user): Add fields here

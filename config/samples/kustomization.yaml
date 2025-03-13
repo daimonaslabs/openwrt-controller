@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- openwrt.daimonaslabs.io_v1alpha1_uciconfig.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
