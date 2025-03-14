@@ -20,6 +20,12 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+type UCIConfigType string
+var UCIConfigTypes = []string{'dhcp', 'dropbear', 'firewall', 'luci', 'network', 'rpcd', 'system', 'ubootenv', 'ucitrack', 'uhttpd', 'wireless'}
+type UCIConfigSection struct {
+	ConfigOptions map[string]string `json:"options,omitempty"`
+}
+
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
@@ -28,8 +34,12 @@ type UCIConfigSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of UCIConfig. Edit uciconfig_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// maps to .type in actual ubus uci call
+	ConfigType UCIConfigType string `json:"configType,omitempty"`
+
+	// +optional
+	// maps to .name in actual ubus uci call
+	Section UCIConfigSection `json:"section,omitempty"`
 }
 
 // UCIConfigStatus defines the observed state of UCIConfig
