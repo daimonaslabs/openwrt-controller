@@ -20,10 +20,24 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+// TODO probably all scrap but keeping for reference for now
 type UCIConfigType string
 var UCIConfigTypes = []string{'dhcp', 'dropbear', 'firewall', 'luci', 'network', 'rpcd', 'system', 'ubootenv', 'ucitrack', 'uhttpd', 'wireless'}
+
+type UCIConfigOptions = map[string]string
 type UCIConfigSection struct {
-	ConfigOptions map[string]string `json:"options,omitempty"`
+	Type string `json:"type,omitempty"`
+	
+	// +optional
+	// if no name, section has .anonymous=true in ubus response
+	Name string `json:"name,omitempty"`
+
+	Options UCIConfigOptions `json:"options,omitempty"`
+}
+
+var wifiIface = "wifi-iface"
+type WirelessConfigSection struct {
+	UCIConfigSection
 }
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -34,12 +48,7 @@ type UCIConfigSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// maps to .type in actual ubus uci call
-	ConfigType UCIConfigType string `json:"configType,omitempty"`
-
-	// +optional
-	// maps to .name in actual ubus uci call
-	Section UCIConfigSection `json:"section,omitempty"`
+	Sections []UCIConfigSection `json:"sections,omitempty"`
 }
 
 // UCIConfigStatus defines the observed state of UCIConfig

@@ -31,7 +31,9 @@ There should be one CustomResource for each config file in `/etc/config` (can al
 - uhttpd
 - wireless
 
-There should also be one for `/etc/board.json`.
+Additionally, there should be one CustomResource for every service listed by `ubus call service list`,
+one for the ubus `session` path, one for the ubus `hostapd` path, and a generic one for the ubus 
+`file` path,
 
 These objects should be constructed of embedded structs mirroring the ubus uci config `.type` field that they are, e.g:.
 
