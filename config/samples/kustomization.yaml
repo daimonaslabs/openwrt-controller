@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- openwrt_v1alpha1_dhcpconfig.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
