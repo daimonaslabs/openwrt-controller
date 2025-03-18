@@ -29,7 +29,9 @@ type DHCPConfigSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of DHCPConfig. Edit dhcpconfig_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// generic XConfigSection types probably won't work, need separate structs for each config type
+	// and each option to be its own field in the struct
+	Dnsmasq []DnsmasqSection
 }
 
 // DHCPConfigStatus defines the observed state of DHCPConfig
@@ -50,13 +52,18 @@ type DHCPConfig struct {
 	Status DHCPConfigStatus `json:"status,omitempty"`
 }
 
-// +kubebuilder:object:root=true
-
 // DHCPConfigList contains a list of DHCPConfig
 type DHCPConfigList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []DHCPConfig `json:"items"`
+	metav1.ListMeta `json:"me
+// +kubebuilder:object:root=true
+tadata,omitempty"`
+	Items []DHCPConfig `json:"items"`
+}
+
+// TODO add all options for dnsmasq sections here
+type DnsmasqSection struct {
+	DomainNeeded bool `json:"domainNeeded,omitempty" ubus:"domainneeded,omitempty"`
 }
 
 func init() {
