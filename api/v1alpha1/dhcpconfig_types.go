@@ -105,6 +105,36 @@ type DnsmasqSection struct {
 	LogQueries          ubus.UbusBool `json:"logQueries,omitempty" ubus:"logqueries,omitempty"`
 	NoDaemon            ubus.UbusBool `json:"noDaemon,omitempty" ubus:"nodaemon,omitempty"`
 	NoHosts             ubus.UbusBool `json:"noHosts,omitempty" ubus:"nohosts,omitempty"`
+	NoNegCache          ubus.UbusBool `json:"noNegCache,omitempty" ubus:"nonegcache,omitempty"`
+	NoResolv            ubus.UbusBool `json:"noResolv,omitempty" ubus:"noresolv,omitempty"`
+	NoWildcard          ubus.UbusBool `json:"noWildcard.omitempty" ubus:"nowildcard,omitempty"`
+	Port                int           `json:"port,omitempty" ubus:"port,omitempty"`
+	QueryPort           int           `json:"queryPort,omitempty" ubus:"queryport,omitempty"`
+	ReadEthers          ubus.UbusBool `json:"readEthers,omitempty" ubus:"readethers,omitempty"`
+	RebindProtection    ubus.UbusBool `json:"rebindProtection,omitempty" ubus:"rebind_protection,omitempty"`
+	RebindLocalhost     ubus.UbusBool `json:"rebindLocalhost,omitempty" ubus:"rebind_localhost,omitempty"`
+	RebindDomain        []string      `json:"rebindDomain,omitempty" ubus:"rebind_domain,omitempty"`
+	ResolvFile          string        `json:"resolvFile,omitempty" ubus:"resolvfile,omitempty"`
+	Server              []string      `json:"server,omitempty" ubus:"server,omitempty"`
+	ServerList          string        `json:"serverList,omitempty" ubus:"serverlist,omitempty"`
+	RevServer           []string      `json:"revServer,omitempty" ubus:"rev_server,omitempty"`
+	Address             []string      `json:"address,omitempty" ubus:"address,omitempty"`
+	StrictOrder         ubus.UbusBool `json:"strictOrder,omitempty" ubus:"strictorder,omitempty"`
+	TFTPRoot            string        `json:"tftpRoot,omitempty" ubus:"tftp_root,omitempty"`
+	MinPort             int           `json:"minPort,omitempty" ubus:"minport,omitempty"`
+	MaxPort             int           `json:"maxPort,omitempty" ubus:"maxport,omitempty"`
+	NoPing              ubus.UbusBool `json:"noPing,omitempty" ubus:"noping,omitempty"`
+	AllServers          ubus.UbusBool `json:"allServers,omitempty" ubus:"allservers,omitempty"`
+	QuietDHCP           ubus.UbusBool `json:"quietDHCP,omitempty" ubus:"quietdhcp,omitempty"`
+	SequentialIP        ubus.UbusBool `json:"sequentialIP,omitempty" ubus:"sequential_ip,omitempty"`
+	AddMAC              string        `json:"addMAC,omitempty" ubus:"addmac,omitempty"` // TODO wtf is that parameter type?
+	LogDHCP             ubus.UbusBool `json:"logDHCP,omitempty" ubus:"logdhcp,omitempty"`
+	DHCPScript          string        `json:"dhcpScript,omitempty" ubus:"dhcpscript,omitempty"`
+	ConfDir             string        `json:"confDir,omitempty" ubus:"confdir,omitempty"`
+	MaxTTL              int           `json:"maxTTL,omitempty" ubus:"max_ttl,omitempty"`
+	MinCacheTTL         int           `json:"minCacheTTL,omitempty" ubus:"min_cache_ttl,omitempty"`
+	MaxCacheTTL         int           `json:"maxCacheTTL,omitempty" ubus:"max_cache_ttl,omitempty"`
+	RapidCommit         ubus.UbusBool `json:"rapidCommit,omitempty" ubus:"rapidcommit,omitempty"`
 }
 
 func init() {
