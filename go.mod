@@ -3,6 +3,7 @@ module github.com/daimonaslabs/openwrt-controller
 go 1.22.0
 
 require (
+	github.com/daimonaslabs/go-ubus-rpc v0.0.0-20250319001912-fb050b64c988
 	github.com/onsi/ginkgo/v2 v2.19.0
 	github.com/onsi/gomega v1.33.1
 	k8s.io/apimachinery v0.31.0
