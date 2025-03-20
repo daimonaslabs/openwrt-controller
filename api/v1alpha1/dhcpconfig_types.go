@@ -17,8 +17,6 @@ limitations under the License.
 package v1alpha1
 
 import (
-	"net/netip"
-
 	ubus "github.com/daimonaslabs/go-ubus-rpc"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -102,7 +100,7 @@ type DnsmasqSection struct {
 	Authoritative ubus.UbusBool `json:"authoritative,omitempty" ubus:"authoritative,omitempty"`
 	// IP addresses to convert into NXDOMAIN responses (to counteract “helpful” upstream DNS servers that never
 	// return NXDOMAIN).
-	BogusNXDOMAIN []netip.Addr `json:"bogusNXDOMAIN,omitempty" ubus:"bogusnxdomain,omitempty"`
+	BogusNXDOMAIN []Addr `json:"bogusNXDOMAIN,omitempty" ubus:"bogusnxdomain,omitempty"`
 	// Reject reverse lookups to private IP ranges where no corresponding entry exists in /etc/hosts.
 	BogusPriv ubus.UbusBool `json:"bogusPriv,omitempty" ubus:"boguspriv,omitempty"`
 	// When set to 0, use each network interface's DNS address in the local /etc/resolv.conf. Normally, only
@@ -163,7 +161,7 @@ type DnsmasqSection struct {
 	// Store DHCP leases in this file.
 	LeaseFile string `json:"leaseFile,omitempty" ubus:"leasefile,omitempty"`
 	// Listen only on the specified IP addresses. If unspecified, listen on IP addresses from each interface.
-	ListenAddress []netip.Addr `json:"listenAddress,omitempty" ubus:"listen_address,omitempty"`
+	ListenAddress []Addr `json:"listenAddress,omitempty" ubus:"listen_address,omitempty"`
 	// Look up DNS entries for this domain from /etc/hosts. This follows the same syntax as Server entries.
 	// See the dnsmasq man page for more details.
 	Local string `json:"local,omitempty" ubus:"local,omitempty"`
