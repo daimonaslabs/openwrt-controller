@@ -1,0 +1,9 @@
+apiVersion: openwrt.daimonaslabs.io/v1alpha1
+kind: WirelessConfig
+metadata:
+  labels:
+    app.kubernetes.io/name: openwrt-controller
+    app.kubernetes.io/managed-by: kustomize
+  name: wirelessconfig-sample
+spec:
+  # TODO(user): Add fields here
