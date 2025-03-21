@@ -2,4 +2,5 @@
 resources:
 - openwrt_v1alpha1_dhcpconfig.yaml
 - openwrt_v1alpha1_wirelessconfig.yaml
+- openwrt_v1alpha1_firewallconfig.yaml
 # +kubebuilder:scaffold:manifestskustomizesamples
