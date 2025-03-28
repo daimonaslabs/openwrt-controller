@@ -174,20 +174,20 @@ type RedirectSection struct {
 	// Multiple ports can be specified like '80 443 465' 1.
 	DestPort string `json:"destPort,omitempty" ubus:"dest_port,omitempty"`
 	// Enable the redirect rule or not.
-	Enabled ubus.UbusBool
+	Enabled ubus.UbusBool `json:"enabled,omitempty" ubus:"enabled,omitempty"`
 	// Specifies the address family (ipv4, ipv6 or any) for which the rules are generated. If unspecified, matches
 	// the address family of other options in this section and defaults to ipv4.
-	Family string
-	Helper string
+	Family string `json:"family,omitempty" ubus:"family,omitempty"`
+	Helper string `json:"helper,omitempty" ubus:"helper,omitempty"`
 	// If specified, match traffic against the given ipset. The match can be inverted by prefixing the value with an
 	// exclamation mark. You can specify the direction as 'setname src' or 'setname dest'. The default if neither src
 	// nor dest are added is to assume src.
 	IPSet string `json:"ipSet,omitempty" ubus:"ipset,omitempty"`
 	// Maximum average matching rate; specified as a number, with an optional /second, /minute, /hour or /day suffix.
 	// Examples: 3/second, 3/sec or 3/s.
-	Limit string
+	Limit string `json:"limit,omitempty" ubus:"limit,omitempty"`
 	// Maximum initial number of packets to match, allowing a short-term average above limit.
-	LimitBurst int
+	LimitBurst int `json:"limitBurst,omitempty" ubus:"limit_burst,omitempty"`
 	// If specified, match traffic against the given firewall mark, e.g. 0xFF to match mark 255 or 0x0/0x1 to match
 	// any even mark value. The match can be inverted by prefixing the value with an exclamation mark, e.g. !0x10 to
 	// match all but mark #16.
@@ -201,29 +201,29 @@ type RedirectSection struct {
 	// Match incoming traffic using the given protocol. Can be one (or several when using list syntax) of tcp, udp,
 	// udplite, icmp, esp, ah, sctp, or all or it can be a numeric value, representing one of these protocols or a
 	// different one. A protocol name from /etc/protocols is also allowed. The number 0 is equivalent to all.
-	Proto string
+	Proto string `json:"proto,omitempty" ubus:"proto,omitempty"`
 	// Activate NAT reflection for this redirect - applicable to DNAT targets.
-	Reflection ubus.UbusBool
+	Reflection ubus.UbusBool `json:"reflection,omitempty" ubus:"reflection,omitempty"`
 	// The source address to use for NAT-reflected packets if reflection is 1. This can be internal or external,
 	// specifying which interface’s address to use. Applicable to DNAT targets.
-	ReflectionSrc string
+	ReflectionSrc string `json:"reflectionSrc,omitempty" ubus:"reflection_src,omitempty"`
 	// List of zones for which reflection should be enabled. Applicable to DNAT targets.
-	ReflectionZone []string
+	ReflectionZone []string `json:"reflectionZone,omitempty" ubus:"reflection_zone,omitempty"`
 	// Specifies the traffic source zone. Refers to one of the defined zone names. For typical port forwards this
 	// usually is wan.
-	Src string
+	Src string `json:"src,omitempty" ubus:"src,omitempty"`
 	// For DNAT, match incoming traffic directed at the given destination IP address. For SNAT rewrite the source
 	// address to the given address.
-	SrcDIP ubus.IP
+	SrcDIP ubus.IP `json:"srcDIP,omitempty" ubus:"src_dip,omitempty"`
 	// For DNAT, match incoming traffic directed at the given destination port or port range on this host. For
 	// SNAT rewrite the source ports to the given value.
-	SrcDPort string
+	SrcDPort string `json:"srcDPort,omitempty" ubus:"src_dport,omitempty"`
 	// Match incoming traffic from the specified source IP address.
-	SrcIP ubus.IP
+	SrcIP ubus.IP `json:"srcIP,omitempty" ubus:"src_ip,omitempty"`
 	// Match incoming traffic from the specified MAC address.
-	SrcMAC ubus.MAC
+	SrcMAC ubus.MAC `json:"srcMAC,omitempty" ubus:"src_mac,omitempty"`
 	// Match incoming traffic originating from the given source port or port range on the client host.
-	SrcPort string
+	SrcPort string `json:"srcPort,omitempty" ubus:"src_port,omitempty"`
 	// If specifed, only match traffic after the given date (inclusive).
 	StartDate ubus.Time `json:"startDate,omitempty" ubus:"start_date,omitempty"`
 	// If specified, only match traffic after the given time of day (inclusive).
