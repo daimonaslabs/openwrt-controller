@@ -18,7 +18,7 @@ RPC servers are needed beyond the built-in ones, they will be written in Go and 
 
 ## Implementation
 #### API Guidelines
-There should be one CustomResource for each section type for each config file in `/etc/config` (can also be shown with `ubus call uci configs`).
+There should be one CustomResource for each section type available in each config file in `/etc/config` (can also be shown with `ubus call uci configs`).
 By default, these are:
 - dhcp
     - boot
@@ -43,7 +43,13 @@ By default, these are:
 - ubootenv
 - ucitrack
 - uhttpd
+    - uhttpd
+    - 
 - wireless
+    - wifi-device
+    - wifi-iface
+    - wifi-station
+    - wifi-vlan
 
 Additionally, there should be one CustomResource for every service listed by `ubus call service list`,
 one for the ubus `session` path, one for the ubus `hostapd` path, and a generic one for the ubus 
@@ -96,3 +102,7 @@ type UCIConfigSpec struct {
 The controller will require an IP address and a username/password to be passed to it as configuration values in order to connect
 to the router. At first boot, a uci session must be established which will be used for all queries and updates. The configs should
 be read from the board and used to create the CustomResource instances. From there, controller-runtime will manage state.
+
+
+## Additional Resources
+- [OpenWRT Docs](https://openwrt.org/docs/start)
