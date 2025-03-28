@@ -18,10 +18,24 @@ RPC servers are needed beyond the built-in ones, they will be written in Go and 
 
 ## Implementation
 #### API Guidelines
-There should be one CustomResource for each config file in `/etc/config` (can also be shown with `ubus call uci configs`). By default, these are:
+There should be one CustomResource for each section type for each config file in `/etc/config` (can also be shown with `ubus call uci configs`).
+By default, these are:
 - dhcp
+    - boot
+    - dnsmasq
+    - dhcp
+    - host
+    - ipset
+    - relay
 - dropbear
 - firewall
+    - defaults
+    - forwardings
+    - include
+    - ipsets
+    - redirects
+    - rules
+    - zones
 - luci
 - network
 - rpcd
