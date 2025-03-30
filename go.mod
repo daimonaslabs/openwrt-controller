@@ -2,6 +2,9 @@ module github.com/daimonaslabs/openwrt-controller
 
 go 1.23.4
 
+// local replaces which should only be used for development purposes
+replace github.com/daimonaslabs/go-ubus-rpc => ../go-ubus-rpc
+
 require (
 	github.com/daimonaslabs/go-ubus-rpc v0.0.0-20250327035259-125dd3db1979
 	github.com/onsi/ginkgo/v2 v2.23.3

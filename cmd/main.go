@@ -151,13 +151,6 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "DHCPConfig")
 		os.Exit(1)
 	}
-	if err = (&controller.WirelessConfigReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "WirelessConfig")
-		os.Exit(1)
-	}
 	if err = (&controller.FirewallConfigReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
