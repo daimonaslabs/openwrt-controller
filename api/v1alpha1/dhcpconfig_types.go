@@ -17,17 +17,17 @@ limitations under the License.
 package v1alpha1
 
 import (
-	ubus "github.com/daimonaslabs/go-ubus-rpc/pkg/encoding"
+	"github.com/daimonaslabs/go-ubus-rpc/pkg/encoding/uci/dhcp"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-type BootSections []ubus.BootSection
-type ClientSections []ubus.ClientSection
-type DHCPSections []ubus.DHCPSection
-type DnsmasqSections []ubus.DnsmasqSection
-type HostSections []ubus.HostSection
-type IPSetSections []ubus.IPSetSection
-type RelaySections []ubus.RelaySection
+type BootSections []dhcp.BootSection
+type ClientSections []dhcp.ClientSection
+type DHCPSections []dhcp.DHCPSection
+type DnsmasqSections []dhcp.DnsmasqSection
+type HostSections []dhcp.HostSection
+type IPSetSections []dhcp.IPSetSection
+type RelaySections []dhcp.RelaySection
 
 // Important: Run "make generate" to regenerate code after modifying this file
 

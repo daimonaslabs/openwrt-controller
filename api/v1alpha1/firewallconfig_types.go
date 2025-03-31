@@ -17,17 +17,19 @@ limitations under the License.
 package v1alpha1
 
 import (
-	ubus "github.com/daimonaslabs/go-ubus-rpc/pkg/encoding"
+	"github.com/daimonaslabs/go-ubus-rpc/pkg/encoding/uci/firewall"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // Important: Run "make generate" to regenerate code after modifying this file
 
-type DefaultsSections []ubus.DefaultsSection
-type ForwardingSections []ubus.ForwardingSection
-type RedirectSections []ubus.RedirectSection
-type RuleSections []ubus.RuleSection
-type ZoneSections []ubus.ZoneSection
+// TODO add embedded types so you can retag with k8s CamelCase
+
+type DefaultsSections []firewall.DefaultsSection
+type ForwardingSections []firewall.ForwardingSection
+type RedirectSections []firewall.RedirectSection
+type RuleSections []firewall.RuleSection
+type ZoneSections []firewall.ZoneSection
 
 // FirewallConfigSpec defines the desired state of FirewallConfig
 type FirewallConfigSpec struct {
