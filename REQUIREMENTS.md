@@ -44,7 +44,6 @@ By default, these are:
 - ucitrack
 - uhttpd
     - uhttpd
-    - 
 - wireless
     - wifi-device
     - wifi-iface
@@ -80,21 +79,6 @@ $ ubus call uci get '{"config":"network"}'
         },
         ...
     }
-}
-```
-
-In Go:
-```
-type UCIConfigType string
-
-type UCIConfigSpec struct {
-	ConfigType UCIConfigType `json:".type,omitempty"`
-
-	// +optional
-	SelfSignedTLSBundles []G8sTargets `json:"selfSignedTLSBundles,omitempty"`
-
-	// +optional
-	SSHKeyPairs []G8sTargets `json:"sshKeyPairs,omitempty"`
 }
 ```
 
