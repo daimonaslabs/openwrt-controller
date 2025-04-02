@@ -51,8 +51,8 @@ By default, these are:
     - wifi-vlan
 
 Additionally, there should be one CustomResource for every service listed by `ubus call service list`,
-one for the ubus `session` path, one for the ubus `hostapd` path, and a generic one for the ubus 
-`file` path,
+one for the ubus `session` path, one for the ubus `hostapd` path, a generic one for the ubus 
+`file` path, one to manage installed packages (`opkg`/`apk`), and one for system upgrades (`auc`/`owut`).
 
 These objects should be constructed of embedded structs mirroring the ubus uci config `.type` field that they are, e.g:.
 
