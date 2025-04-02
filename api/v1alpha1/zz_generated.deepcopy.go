@@ -21,7 +21,7 @@ limitations under the License.
 package v1alpha1
 
 import (
-	"github.com/daimonaslabs/go-ubus-rpc/pkg/encoding/uci"
+	"github.com/daimonaslabs/go-ubus-rpc/pkg/uci"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
