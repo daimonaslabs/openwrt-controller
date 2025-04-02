@@ -1,0 +1,597 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.5
+  name: firewallconfigs.openwrt.daimonaslabs.io
+spec:
+  group: openwrt.daimonaslabs.io
+  names:
+    kind: FirewallConfig
+    listKind: FirewallConfigList
+    plural: firewallconfigs
+    singular: firewallconfig
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: FirewallConfig is the Schema for the firewallconfigs API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FirewallConfigSpec defines the desired state of FirewallConfig
+            properties:
+              defaultsSections:
+                items:
+                  properties:
+                    acceptRedirects:
+                      description: Accepts redirects. Implemented upstream in Linux
+                        Kernel.
+                      type: string
+                    acceptSourceRoute:
+                      description: Implemented upstream in Linux Kernel.
+                      type: string
+                    anyRejectCode:
+                      description: Determines method of packet rejection.
+                      type: integer
+                    autoHelper:
+                      description: Enable Conntrack helpers.
+                      type: string
+                    autoIncludes:
+                      description: (fw4 only, OpenWRT 22.03 and later) Enable automatic
+                        nftables includes under /usr/share/nftables.d/
+                      type: string
+                    customChains:
+                      description: |-
+                        Enable generation of custom rule chain hooks for user generated rules. User rules would be typically
+                        stored in firewall.user but some packages e.g. BCP38 also make use of these hooks.
+                      type: string
+                    disableIPv6:
+                      description: Disable IPv6 firewall rules. (not supported by
+                        fw4).
+                      type: string
+                    dotAnonymous:
+                      type: boolean
+                    dotIndex:
+                      type: integer
+                    dotName:
+                      type: string
+                    dotType:
+                      type: string
+                    dropInvalid:
+                      description: Drop invalid packets (e.g. not matching any active
+                        connection).
+                      type: string
+                    flowOffloading:
+                      description: Enable software flow offloading for connections
+                        (decrease cpu load / increase routing throughput).
+                      type: string
+                    flowOffloadingHW:
+                      description: Enable hardware flow offloading for connecions
+                        (depends on flow_offloading and hw capability).
+                      type: string
+                    forward:
+                      description: Set policy for the FORWARD chain of the filter
+                        table.
+                      type: string
+                    input:
+                      description: Set policy for the INPUT chain of the filter table.
+                      type: string
+                    output:
+                      description: Set policy for the OUTPUT chain of the filter table.
+                      type: string
+                    synFlood:
+                      description: Enable SYN flood protection (obsoleted by synflood_protect
+                        setting).
+                      type: string
+                    synFloodBurst:
+                      description: Set burst limit for SYN packets above which the
+                        traffic is considered a flood if it exceeds the allowed rate.
+                      type: string
+                    synFloodProtect:
+                      description: Enable SYN flood protection.
+                      type: string
+                    synFloodRate:
+                      description: Set rate limit (packets/second) for SYN packets
+                        above which the traffic is considered a flood.
+                      type: string
+                    tcpECN:
+                      description: |-
+                        0 Disable, 1 Enable, 2 Enable when requested for ingress (but disable for egress) Explicit Congestion
+                        Notification. Affects only traffic originating from the router itself. Implemented upstream in Linux Kernel.
+                      type: integer
+                    tcpRejectCode:
+                      description: Determines method of packet rejection.
+                      type: integer
+                    tcpSynCookies:
+                      description: Enable the use of SYN cookies.
+                      type: string
+                    tcpWindowScaling:
+                      description: Enable TCP window scaling.
+                      type: string
+                  required:
+                  - dotAnonymous
+                  - dotIndex
+                  - dotName
+                  - dotType
+                  type: object
+                type: array
+              forwardingSections:
+                items:
+                  properties:
+                    dest:
+                      description: Specifies the traffic destination zone. Refers
+                        to one of the defined zone names.
+                      type: string
+                    dotAnonymous:
+                      type: boolean
+                    dotIndex:
+                      type: integer
+                    dotName:
+                      type: string
+                    dotType:
+                      type: string
+                    enabled:
+                      description: If set to 0, forward is disabled.
+                      type: string
+                    family:
+                      description: Specifies the address family (ipv4, ipv6 or any)
+                        for which the rules are generated.
+                      type: string
+                    ipSet:
+                      description: |-
+                        If specified, match traffic against the given ipset. The match can be inverted by prefixing the value
+                        with an exclamation mark.
+                      type: string
+                    name:
+                      description: Unique forwarding name.
+                      type: string
+                    src:
+                      description: |-
+                        Specifies the traffic source zone. Refers to one of the defined zone names. For typical port forwards this
+                        usually is 'wan'.
+                      type: string
+                  required:
+                  - dotAnonymous
+                  - dotIndex
+                  - dotName
+                  - dotType
+                  type: object
+                type: array
+              redirectSections:
+                items:
+                  properties:
+                    dest:
+                      description: |-
+                        Specifies the traffic destination zone. Refers to one of the defined zone names, or * for any zone. If
+                        specified, the rule applies to forwarded traffic; otherwise, it is treated as input rule.
+                      type: string
+                    destIP:
+                      description: |-
+                        Match incoming traffic directed to the specified destination IP address, CIDR notations can be used, see
+                        note above. With no dest zone, this is treated as an input rule!
+                      type: string
+                    destPort:
+                      description: |-
+                        Match incoming traffic directed at the given destination port or port range, if relevant proto is specified.
+                        Multiple ports can be specified like '80 443 465' 1.
+                      type: string
+                    dotAnonymous:
+                      type: boolean
+                    dotIndex:
+                      type: integer
+                    dotName:
+                      type: string
+                    dotType:
+                      type: string
+                    enabled:
+                      description: Enable the redirect rule or not.
+                      type: string
+                    family:
+                      description: |-
+                        Specifies the address family (ipv4, ipv6 or any) for which the rules are generated. If unspecified, matches
+                        the address family of other options in this section and defaults to ipv4.
+                      type: string
+                    helper:
+                      type: string
+                    ipSet:
+                      description: |-
+                        If specified, match traffic against the given ipset. The match can be inverted by prefixing the value with an
+                        exclamation mark. You can specify the direction as 'setname src' or 'setname dest'. The default if neither src
+                        nor dest are added is to assume src.
+                      type: string
+                    limit:
+                      description: |-
+                        Maximum average matching rate; specified as a number, with an optional /second, /minute, /hour or /day suffix.
+                        Examples: 3/second, 3/sec or 3/s.
+                      type: string
+                    limitBurst:
+                      description: Maximum initial number of packets to match, allowing
+                        a short-term average above limit.
+                      type: integer
+                    mark:
+                      description: |-
+                        If specified, match traffic against the given firewall mark, e.g. 0xFF to match mark 255 or 0x0/0x1 to match
+                        any even mark value. The match can be inverted by prefixing the value with an exclamation mark, e.g. !0x10 to
+                        match all but mark #16.
+                      type: string
+                    monthdays:
+                      description: |-
+                        If specified, only match traffic during the given days of the month, e.g. 2 5 30 to only match on every 2nd,
+                        5th and 30rd day of the month. The list can be inverted by prefixing it with an exclamation mark,
+                        e.g. ! 31 to always match but on the 31st of the month.
+                      type: string
+                    name:
+                      description: Name of redirect.
+                      type: string
+                    proto:
+                      description: |-
+                        Match incoming traffic using the given protocol. Can be one (or several when using list syntax) of tcp, udp,
+                        udplite, icmp, esp, ah, sctp, or all or it can be a numeric value, representing one of these protocols or a
+                        different one. A protocol name from /etc/protocols is also allowed. The number 0 is equivalent to all.
+                      type: string
+                    reflection:
+                      description: Activate NAT reflection for this redirect - applicable
+                        to DNAT targets.
+                      type: string
+                    reflectionSrc:
+                      description: |-
+                        The source address to use for NAT-reflected packets if reflection is 1. This can be internal or external,
+                        specifying which interface’s address to use. Applicable to DNAT targets.
+                      type: string
+                    reflectionZone:
+                      description: List of zones for which reflection should be enabled.
+                        Applicable to DNAT targets.
+                      items:
+                        type: string
+                      type: array
+                    src:
+                      description: |-
+                        Specifies the traffic source zone. Refers to one of the defined zone names. For typical port forwards this
+                        usually is wan.
+                      type: string
+                    srcDIP:
+                      description: |-
+                        For DNAT, match incoming traffic directed at the given destination IP address. For SNAT rewrite the source
+                        address to the given address.
+                      type: string
+                    srcDPort:
+                      description: |-
+                        For DNAT, match incoming traffic directed at the given destination port or port range on this host. For
+                        SNAT rewrite the source ports to the given value.
+                      type: string
+                    srcIP:
+                      description: Match incoming traffic from the specified source
+                        IP address.
+                      type: string
+                    srcMAC:
+                      description: Match incoming traffic from the specified MAC address.
+                      type: string
+                    srcPort:
+                      description: Match incoming traffic originating from the given
+                        source port or port range on the client host.
+                      type: string
+                    startDate:
+                      description: If specifed, only match traffic after the given
+                        date (inclusive).
+                      type: string
+                    startTime:
+                      description: If specified, only match traffic after the given
+                        time of day (inclusive).
+                      type: string
+                    stopDate:
+                      description: If specified, only match traffic before the given
+                        date (inclusive).
+                      type: string
+                    stopTime:
+                      description: If specified, only match traffic before the given
+                        time of day (inclusive).
+                      type: string
+                    target:
+                      description: Firewall action (ACCEPT, REJECT, DROP, MARK, NOTRACK)
+                        for matched traffic.
+                      type: string
+                    utcTime:
+                      description: Treat all given time values as UTC time instead
+                        of local time.
+                      type: string
+                    weekdays:
+                      description: |-
+                        If specified, only match traffic during the given week days, e.g. sun mon thu fri to only match on Sundays,
+                        Mondays, Thursdays and Fridays. The list can be inverted by prefixing it with an exclamation mark,
+                        e.g. ! sat sun to always match but on Saturdays and Sundays.
+                      type: string
+                  required:
+                  - dotAnonymous
+                  - dotIndex
+                  - dotName
+                  - dotType
+                  type: object
+                type: array
+              ruleSections:
+                items:
+                  properties:
+                    dest:
+                      description: |-
+                        Specifies the traffic destination zone. Refers to one of the defined zone names, or * for any zone. If
+                        specified, the rule applies to forwarded traffic; otherwise, it is treated as input rule.
+                      type: string
+                    destIP:
+                      description: |-
+                        Match incoming traffic directed to the specified destination IP address, CIDR notations can be used, see
+                        note above. With no dest zone, this is treated as an input rule!
+                      type: string
+                    destPort:
+                      description: |-
+                        Match incoming traffic directed at the given destination port or port range, if relevant proto is specified.
+                        Multiple ports can be specified like '80 443 465' 1.
+                      type: string
+                    device:
+                      type: string
+                    direction:
+                      type: string
+                    dotAnonymous:
+                      type: boolean
+                    dotIndex:
+                      type: integer
+                    dotName:
+                      type: string
+                    dotType:
+                      type: string
+                    enabled:
+                      description: Enable or disable rule.
+                      type: string
+                    family:
+                      description: |-
+                        Specifies the address family (ipv4, ipv6 or any) for which the rules are generated. If unspecified, matches
+                        the address family of other options in this section and defaults to any.
+                      type: string
+                    helper:
+                      type: string
+                    icmpType:
+                      description: |-
+                        For protocol icmp select specific ICMP types to match. Values can be either exact ICMP type numbers or type
+                        names (see ICMPTypes var).
+                      items:
+                        type: string
+                      type: array
+                    ipSet:
+                      description: |-
+                        If specified, match traffic against the given ipset. The match can be inverted by prefixing the value with an
+                        exclamation mark. You can specify the direction as 'setname src' or 'setname dest'. The default if neither src
+                        nor dest are added is to assume src.
+                      type: string
+                    limit:
+                      description: |-
+                        Maximum average matching rate; specified as a number, with an optional /second, /minute, /hour or /day suffix.
+                        Examples: 3/minute, 3/min or 3/m.
+                      type: string
+                    limitBurst:
+                      description: Maximum initial number of packets to match, allowing
+                        a short-term average above limit.
+                      type: integer
+                    mark:
+                      description: |-
+                        If specified, match traffic against the given firewall mark, e.g. 0xFF to match mark 255 or 0x0/0x1 to match
+                        any even mark value. The match can be inverted by prefixing the value with an exclamation mark, e.g. !0x10 to
+                        match all but mark #16.
+                      type: string
+                    monthdays:
+                      description: |-
+                        If specified, only match traffic during the given days of the month, e.g. 2 5 30 to only match on every 2nd,
+                        5th and 30rd day of the month. The list can be inverted by prefixing it with an exclamation mark,
+                        e.g. ! 31 to always match but on the 31st of the month.
+                      type: string
+                    name:
+                      description: Name of rule.
+                      type: string
+                    proto:
+                      description: |-
+                        Match incoming traffic using the given protocol. Can be one (or several when using list syntax) of tcp,
+                        udp, udplite, icmp, esp, ah, sctp, or all or it can be a numeric value, representing one of these protocols
+                        or a different one. A protocol name from /etc/protocols is also allowed. The number 0 is equivalent to all.
+                      type: string
+                    setHelper:
+                      type: string
+                    setMark:
+                      description: |-
+                        Zeroes out the bits given by mask and ORs value into the packet mark. If mask is omitted, 0xFFFFFFFF is
+                        assumed.
+                      type: string
+                    setXmark:
+                      description: |-
+                        Zeroes out the bits given by mask and XORs value into the packet mark. If mask is omitted, 0xFFFFFFFF is
+                        assumed.
+                      type: string
+                    src:
+                      description: |-
+                        Specifies the traffic source zone. Refers to one of the defined zone names, or * for any zone. If omitted,
+                        the rule applies to output traffic.
+                      type: string
+                    srcIP:
+                      description: Match incoming traffic from the specified source
+                        IP address, CIDR notations can be used, see note above.
+                      type: string
+                    srcMAC:
+                      description: Match incoming traffic from the specified MAC address.
+                      type: string
+                    srcPort:
+                      description: |-
+                        Match incoming traffic from the specified source port or port range, if relevant proto is specified.
+                        Multiple ports can be specified like '80 443 465' 1.
+                      type: string
+                    startDate:
+                      description: If specifed, only match traffic after the given
+                        date (inclusive).
+                      type: string
+                    startTime:
+                      description: If specified, only match traffic after the given
+                        time of day (inclusive).
+                      type: string
+                    stopDate:
+                      description: If specified, only match traffic before the given
+                        date (inclusive).
+                      type: string
+                    stopTime:
+                      description: If specified, only match traffic before the given
+                        time of day (inclusive).
+                      type: string
+                    target:
+                      description: Firewall action (ACCEPT, REJECT, DROP, MARK, NOTRACK)
+                        for matched traffic.
+                      type: string
+                    utcTime:
+                      description: Treat all given time values as UTC time instead
+                        of local time.
+                      type: string
+                    weekdays:
+                      description: |-
+                        If specified, only match traffic during the given week days, e.g. sun mon thu fri to only match on Sundays,
+                        Mondays, Thursdays and Fridays. The list can be inverted by prefixing it with an exclamation mark,
+                        e.g. ! sat sun to always match but on Saturdays and Sundays.
+                      type: string
+                  required:
+                  - dotAnonymous
+                  - dotIndex
+                  - dotName
+                  - dotType
+                  type: object
+                type: array
+              zoneSections:
+                items:
+                  properties:
+                    autoHelper:
+                      description: Add CT helpers for zone.
+                      type: string
+                    customChains:
+                      description: |-
+                        Enable generation of custom rule chain hooks for user generated rules. Has no effect if disabled (0) in a
+                        DefaultsSection.
+                      type: string
+                    device:
+                      description: |-
+                        List of L3 network interface names attached to this zone, e.g. tun+ or ppp+ to match any TUN or PPP interface.
+                        This is specifically suitable for undeclared interfaces which lack built-in netifd support such as OpenVPN.
+                        Otherwise network is preferable and device should be avoided.
+                      items:
+                        type: string
+                      type: array
+                    dotAnonymous:
+                      type: boolean
+                    dotIndex:
+                      type: integer
+                    dotName:
+                      type: string
+                    dotType:
+                      type: string
+                    enabled:
+                      description: If set to 0, zone is disabled
+                      type: string
+                    family:
+                      description: |-
+                        Specifies the address family (ipv4, ipv6 or any) for which the rules are generated. If unspecified, matches
+                        the address family of other options in this section and defaults to any.
+                      type: string
+                    forward:
+                      description: Policy (ACCEPT, REJECT, DROP) for forwarded zone
+                        traffic.
+                      type: string
+                    helper:
+                      description: List of helpers to add to zone.
+                      items:
+                        type: string
+                      type: array
+                    input:
+                      description: Policy (ACCEPT, REJECT, DROP) for incoming zone
+                        traffic.
+                      type: string
+                    log:
+                      description: Bit field to enable logging in the filter and/or
+                        mangle tables, bit 0 = filter, bit 1 = mangle.
+                      type: integer
+                    logLimit:
+                      description: Limits the amount of log messages per interval.
+                      type: string
+                    masq:
+                      description: Specifies whether outgoing zone IPv4 traffic should
+                        be masqueraded. This is typically enabled on the wan zone.
+                      type: string
+                    masq6:
+                      description: |-
+                        Specifies whether outgoing zone IPv6 traffic should be masqueraded. This is typically enabled on the wan zone.
+                        Available with fw4. Requires sourcefilter=0 for DHCPv6 interfaces with missing GUA prefix.
+                      type: string
+                    masqAllowInvalid:
+                      description: Do not add DROP INVALID rules, if masquerading
+                        is used. The DROP rules are supposed to prevent NAT leakage.
+                      type: string
+                    masqDest:
+                      description: |-
+                        Limit masquerading to the given destination subnets. Negation is possible by prefixing the subnet with !;
+                        multiple subnets are allowed.
+                      items:
+                        type: string
+                      type: array
+                    masqSrc:
+                      description: |-
+                        Limit masquerading to the given source subnets. Negation is possible by prefixing the subnet with !; multiple
+                        subnets are allowed.
+                      items:
+                        type: string
+                      type: array
+                    mtuFix:
+                      description: Enable MSS clamping for outgoing zone traffic.
+                      type: string
+                    name:
+                      description: Unique zone name. 11 characters is the maximum
+                        working firewall zone name length.
+                      type: string
+                    network:
+                      description: |-
+                        List of interfaces attached to this zone. If omitted and neither extra* options, subnets nor devices are given,
+                        the value of name is used by default. Alias interfaces defined in the network config cannot be used as valid
+                        'standalone' networks. Use list syntax.
+                      type: string
+                    output:
+                      description: Policy (ACCEPT, REJECT, DROP) for outgoing zone
+                        traffic.
+                      type: string
+                    subnet:
+                      description: List of IP subnets attached to this zone.
+                      items:
+                        type: string
+                      type: array
+                  required:
+                  - dotAnonymous
+                  - dotIndex
+                  - dotName
+                  - dotType
+                  type: object
+                type: array
+            type: object
+          status:
+            description: FirewallConfigStatus defines the observed state of FirewallConfig
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
