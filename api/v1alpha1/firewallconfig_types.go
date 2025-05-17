@@ -17,7 +17,7 @@ limitations under the License.
 package v1alpha1
 
 import (
-	"github.com/daimonaslabs/go-ubus-rpc/pkg/uci"
+	"github.com/daimonaslabs/go-ubus-rpc/pkg/ubus/uci"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -226,7 +226,7 @@ type RuleSection struct {
 	Helper string `json:"helper,omitempty"`
 	// For protocol icmp select specific ICMP types to match. Values can be either exact ICMP type numbers or type
 	// names (see ICMPTypes var).
-	ICMPType []string `json:"icmpType,omitempty"`
+	ICMPType []string `json:"icmpType,omitempty"` // <------------------------------------------------------------------------------------- TODO
 	// If specified, match traffic against the given ipset. The match can be inverted by prefixing the value with an
 	// exclamation mark. You can specify the direction as 'setname src' or 'setname dest'. The default if neither src
 	// nor dest are added is to assume src.
@@ -331,7 +331,7 @@ type ZoneSection struct {
 	// List of interfaces attached to this zone. If omitted and neither extra* options, subnets nor devices are given,
 	// the value of name is used by default. Alias interfaces defined in the network config cannot be used as valid
 	// 'standalone' networks. Use list syntax.
-	Network string `json:"network,omitempty"`
+	Network []string `json:"network,omitempty"`
 	// Policy (ACCEPT, REJECT, DROP) for outgoing zone traffic.
 	Output string `json:"output,omitempty"`
 	// List of IP subnets attached to this zone.
