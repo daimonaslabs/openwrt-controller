@@ -1,5 +1,5 @@
 # openwrt-controller
-A Kubernetes controller to manage a router running OpenWRT
+A Kubernetes controller to manage a router running OpenWrt
 
 ### Bootstrapping
 ```

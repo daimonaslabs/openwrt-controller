@@ -69,7 +69,7 @@ type DefaultsSection struct {
 	AnyRejectCode int `json:"anyRejectCode,omitempty"`
 	// Enable Conntrack helpers.
 	AutoHelper uci.StringBool `json:"autoHelper,omitempty"`
-	// (fw4 only, OpenWRT 22.03 and later) Enable automatic nftables includes under /usr/share/nftables.d/
+	// (fw4 only, OpenWrt 22.03 and later) Enable automatic nftables includes under /usr/share/nftables.d/
 	AutoIncludes uci.StringBool `json:"autoIncludes,omitempty"`
 	// Enable generation of custom rule chain hooks for user generated rules. User rules would be typically
 	// stored in firewall.user but some packages e.g. BCP38 also make use of these hooks.

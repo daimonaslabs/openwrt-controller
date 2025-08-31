@@ -12,7 +12,7 @@ for lots of useful things like automated testing and publishing on Artifact Hub.
 Most widely used controller framework, supported by the upstream Kubernetes project itself.
 
 #### [go-ubus-rpc](https://github.com/daimonaslabs/go-ubus-rpc)
-This will be used to make calls to the running instance of OpenWRT and execute [uci](https://openwrt.org/docs/techref/uci)
+This will be used to make calls to the running instance of OpenWrt and execute [uci](https://openwrt.org/docs/techref/uci)
 system calls via [ubus](https://openwrt.org/docs/techref/ubus) to modify the router's configuration. If any additional
 RPC servers are needed beyond the built-in ones, they will be written in Go and added to ubus via [rpcd](https://openwrt.org/docs/techref/rpcd).
 
@@ -88,4 +88,4 @@ be read from the board and used to create the CustomResource instances. From the
 
 
 ## Additional Resources
-- [OpenWRT Docs](https://openwrt.org/docs/start)
+- [OpenWrt Docs](https://openwrt.org/docs/start)

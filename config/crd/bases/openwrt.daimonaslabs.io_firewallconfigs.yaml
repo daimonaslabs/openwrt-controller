@@ -56,7 +56,7 @@ spec:
                       description: Enable Conntrack helpers.
                       type: string
                     autoIncludes:
-                      description: (fw4 only, OpenWRT 22.03 and later) Enable automatic
+                      description: (fw4 only, OpenWrt 22.03 and later) Enable automatic
                         nftables includes under /usr/share/nftables.d/
                       type: string
                     customChains:

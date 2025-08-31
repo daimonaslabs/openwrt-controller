@@ -25,13 +25,20 @@ import (
 
 // DHCPConfigSpec defines the desired state of DHCPConfig
 type DHCPConfigSpec struct {
-	BootSections    []BootSection    `json:"bootSections,omitempty"`
-	ClientSections  []ClientSection  `json:"clientSections,omitempty"`
-	DHCPSections    []DHCPSection    `json:"dhcpSections,omitempty"`
-	DnsmasqSections []DnsmasqSection `json:"dnsmasqSections,omitempty"`
-	HostSections    []HostSection    `json:"hostSections,omitempty"`
-	IPSetSections   []IPSetSection   `json:"ipsetSections,omitempty"`
-	RelaySections   []RelaySection   `json:"relaySections,omitempty"`
+	BootSections        []BootSection        `json:"bootSections,omitempty"`
+	CircuitIDSections   []CircuitIDSection   `json:"circuitIDSections,omitempty"`
+	DHCPSections        []DHCPSection        `json:"dhcpSections,omitempty"`
+	DnsmasqSections     []DnsmasqSection     `json:"dnsmasqSections,omitempty"`
+	HostSections        []HostSection        `json:"hostSections,omitempty"`
+	HostRecordSections  []HostRecordSection  `json:"hostRecordSections,omitempty"`
+	MACSections         []MACSection         `json:"macSections,omitempty"`
+	OdhcpdSections      []OdhcpdSection      `json:"odhcpdSections,omitempty"`
+	RelaySections       []RelaySection       `json:"relaySections,omitempty"`
+	RemoteIDSections    []RemoteIDSection    `json:"remoteIDSections,omitempty"`
+	SubscrIDSections    []SubscrIDSection    `json:"SubscrIDSections,omitempty"`
+	TagSections         []TagSection         `json:"tagSections,omitempty"`
+	UserClassSections   []UserClassSection   `json:"userClassSections,omitempty"`
+	VendorClassSections []VendorClassSection `json:"vendorClassSections,omitempty"`
 }
 
 // DHCPConfigStatus defines the observed state of DHCPConfig
@@ -84,7 +91,7 @@ type DnsmasqSection struct {
 	// +optional
 	AddLocalDomain uci.StringBool `json:"addLocalDomain,omitempty"`
 	// Add A, AAAA, and PTR records for this router only on DHCP served LAN.
-	// Enhanced function available since OpenWRT 18.06 with option AddLocalFQDN
+	// Enhanced function available since OpenWrt 18.06 with option AddLocalFQDN
 	AddLocalHostname uci.StringBool `json:"addLocalHostname,omitempty"`
 	// Add A, AAAA, and PTR records for this router only on DHCP served LAN.
 	// 0: Disable.
@@ -92,7 +99,7 @@ type DnsmasqSection struct {
 	// 2: Hostname on All Addresses.
 	// 3: FDQN on All Addresses.
 	// 4: iface.host.domain on All Addresses.
-	// Available since OpenWRT 18.06
+	// Available since OpenWrt 18.06
 	AddLocalFQDN int `json:"addLocalFQDN,omitempty"`
 	// Add the MAC address of the requester to DNS queries which are forwarded upstream; this may be used to do
 	// DNS filtering by the upstream server.
@@ -104,7 +111,7 @@ type DnsmasqSection struct {
 	// Labels WAN interfaces like add_local_fqdn instead of your ISP assigned default which may be
 	// obscure. WAN is inferred from config dhcp sections with option ignore 1 set, so they do not
 	// need to be named WAN.
-	// Available since OpenWRT 18.06
+	// Available since OpenWrt 18.06
 	AddWANFQDN int `json:"addWANFQDN,omitempty"`
 	// Additional host files to read for serving DNS responses. Syntax in each file is the same as /etc/hosts.
 	AddnHosts []string `json:"addnHosts,omitempty"`

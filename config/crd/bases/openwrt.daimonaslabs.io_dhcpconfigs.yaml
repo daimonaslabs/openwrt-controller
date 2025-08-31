@@ -107,12 +107,12 @@ spec:
                         2: Hostname on All Addresses.
                         3: FDQN on All Addresses.
                         4: iface.host.domain on All Addresses.
-                        Available since OpenWRT 18.06
+                        Available since OpenWrt 18.06
                       type: integer
                     addLocalHostname:
                       description: |-
                         Add A, AAAA, and PTR records for this router only on DHCP served LAN.
-                        Enhanced function available since OpenWRT 18.06 with option AddLocalFQDN
+                        Enhanced function available since OpenWrt 18.06 with option AddLocalFQDN
                       type: string
                     addMAC:
                       description: |-
@@ -128,7 +128,7 @@ spec:
                         Labels WAN interfaces like add_local_fqdn instead of your ISP assigned default which may be
                         obscure. WAN is inferred from config dhcp sections with option ignore 1 set, so they do not
                         need to be named WAN.
-                        Available since OpenWRT 18.06
+                        Available since OpenWrt 18.06
                       type: integer
                     addnHosts:
                       description: Additional host files to read for serving DNS responses.
